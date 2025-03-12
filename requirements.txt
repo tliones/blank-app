@@ -1,1 +1,6 @@
 streamlit
+numpy as np
+matplotlib
+ipywidgets
+IPython.display
+math
