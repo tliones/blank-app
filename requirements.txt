@@ -1,6 +1,7 @@
 streamlit
-numpy as np
+numpy
 matplotlib
 ipywidgets
 IPython.display
 math
+thermo
