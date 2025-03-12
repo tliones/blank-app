@@ -1,4 +1,13 @@
 #Generate Random Values for Inputs (v, Temp, Length, Width)
+
+#Import Libraries
+import numpy as np
+import matplotlib.pyplot as plt
+import ipywidgets as widgets
+from IPython.display import display
+from math import sqrt
+
+
 num_samples = 10000
 MW = 92.1
 Patm = 101325
