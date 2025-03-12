@@ -4,8 +4,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import ipywidgets as widgets
+import streamlit as st
 from IPython.display import display
 from math import sqrt
+
 
 
 num_samples = 10000
