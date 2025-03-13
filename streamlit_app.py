@@ -80,9 +80,20 @@ max_As = st.slider('Max As (m²):', 0.0, 20.0, 10.0, 0.1)
 if st.button('Calculate Generation Rate'):
     G_Rate = Chemical_Generation_Rate(min_Vw, max_Vw, min_Ta, max_Ta, min_As, max_As, chem_name)
     st.write('Generation Rate Calculated!')
+
+    median_value = np.median(G_Rate)
+    percentile_95 = np.percentile(G_Rate, 95)
+
     plt.figure(figsize=(10, 5))
     plt.hist(G_Rate, bins=50, alpha=0.7, color='blue', edgecolor='black', density=True)
+
+    plt.axvline(median_value, color='r', linestyle='--', linewidth=2, label=f'Median: {median_value:.2f}')
+    plt.axvline(percentile_95, color='g', linestyle='-.', linewidth=2, label=f'95th Percentile: {percentile_95:.2f}')
+  
     plt.xlabel("Generation Rate (G) (gm/min)")
     plt.ylabel("Density")
     plt.title("Distribution of the Generation Rate (G)")
     st.pyplot(plt)
+
+    st.write(f"**Median:** {median_value:.2f} gm/min")
+    st.write(f"**95th Percentile:** {percentile_95:.2f} gm/min")
