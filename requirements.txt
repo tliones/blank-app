@@ -4,3 +4,4 @@ matplotlib
 ipywidgets
 thermo
 folium
+streamlit-folium
