@@ -152,7 +152,7 @@ def calculate_concentration(x, y, Q, u, sigma_y, sigma_z, H, chem_name):
     return C_ppm
 
 # Plotting function
-def plot_data(stability_class):
+def plot_data(stability_class, Q, u):
     # Define grid in x and y directions
     x_values = np.linspace(10, 1000, 100)  # Downwind distance from 10m to 1000m
     y_values = np.linspace(-500, 500, 200)  # Crosswind distance from -500m to 500m
@@ -258,7 +258,7 @@ if st.button("Dispersion Model"):
     st.write(f"**Median:** {median_value:.2f} gm/min")
     st.write(f"**95th Percentile:** {percentile_95:.2f} gm/min")
 
-    plot_data(stability_class)
+    plot_data(stability_class, percentile_95, wind_speed)
 
 
 
