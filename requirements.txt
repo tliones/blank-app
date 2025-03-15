@@ -5,3 +5,5 @@ ipywidgets
 thermo
 folium
 streamlit-folium
+suncalc
+timezonefinder
