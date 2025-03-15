@@ -144,6 +144,12 @@ def get_sigma(stability_class, x):
     elif stability_class == 'D':  # Neutral
         sigma_y = 0.08 * x ** 0.894
         sigma_z = 0.06 * x ** 0.911
+    elif stability_class == 'E':  # Slightly Stable
+        sigma_y = 0.06 * x ** 0.894
+        sigma_z = 0.03 * x ** 0.911
+    elif stability_class == 'F':  # Very Stable
+        sigma_y = 0.04 * x ** 0.894
+        sigma_z = 0.016 * x ** 0.911
     return sigma_y, sigma_z
 
 def calculate_concentration(x, y, Q, u, sigma_y, sigma_z, H, chem_name):
