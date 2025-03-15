@@ -169,7 +169,7 @@ def plot_data(stability_class, Q, u, chem_name):
     for i in range(len(x_values)):
         sigma_y, sigma_z = get_sigma(stability_class, x_values[i])
         for j in range(len(y_values)):
-            concentration_map[j, i] = calculate_concentration(x_values[i], y_values[j], Q, u, sigma_y, sigma_z)
+            concentration_map[j, i] = calculate_concentration(x_values[i], y_values[j], Q, u, sigma_y, sigma_z, chem_name)
 
     fig, ax = plt.subplots(figsize=(10, 5))
     colors = ['green', 'orange', 'red']
