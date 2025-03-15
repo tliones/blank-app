@@ -162,7 +162,7 @@ def calculate_concentration(x, y, Q, u, sigma_y, sigma_z, chem_name):
 def plot_data(stability_class, Q, u, chem_name):
     # Define grid in x and y directions
     x_values = np.linspace(10, 1000, 100)  # Downwind distance from 10m to 1000m
-    y_values = np.linspace(-500, 500, 200)  # Crosswind distance from -500m to 500m
+    y_values = np.linspace(-100, 100, 100)  # Crosswind distance from -100m to 100m
     X, Y = np.meshgrid(x_values, y_values)
     concentration_map = np.zeros_like(X)
 
@@ -171,33 +171,17 @@ def plot_data(stability_class, Q, u, chem_name):
         sigma_y, sigma_z = get_sigma(stability_class, x_values[i])
         for j in range(len(y_values)):
             concentration_map[j, i] = calculate_concentration(x_values[i], y_values[j], Q, u, sigma_y, sigma_z, chem_name)
-
-    fig, ax = plt.subplots(figsize=(10, 5))
-    colors = ['green', 'orange', 'red']
-    thresholds = {'TLV': 0.5, 'STEL': 5, 'IDLH': 500}
-    results = []
-    for index, (name, level) in enumerate(thresholds.items()):
-        mask = concentration_map >= level
-        if np.any(mask):
-            y_dist = np.max(np.abs(Y[mask]))  # Max y-distance from centerline
-            x_dist = np.max(X[mask])          # Max x-distance from source
-        else:
-            y_dist = 0
-            x_dist = 0
-        results.append((name, y_dist, x_dist))
-        ax.bar(name, x_dist, color=colors[index], label=f"{name} (Max X-Dist)")
-
-    df = pd.DataFrame(results, columns=['Threshold', 'Max Y-Distance (m)', 'Max X-Distance (m)'])
-    st.write(df)
-
-    # Plot customization
-    ax.set_title(f'Maximum X Distances for Benzene Concentrations\nStability Class {stability_class}')
-    ax.set_ylabel('Distance (m)')
-    ax.legend()
+    
+    fig, ax = plt.subplots(figsize=(12, 7))
+    heatmap = ax.pcolormesh(X, Y, concentration_map, shading='auto', cmap='viridis')
+    plt.colorbar(heatmap, label='Concentration (ppm)', ax=ax)
+    contours = ax.contour(X, Y, concentration_map, levels=contour_levels, colors=['yellow', 'orange', 'red'], linewidths=2)
+    ax.clabel(contours, inline=True, fontsize=8, fmt='%1.1f ppm')
+    ax.set_title('Ground-Level Benzene Concentration (x-y Plane) with Hazard Contours')
+    ax.set_xlabel('Distance Downwind (m)')
+    ax.set_ylabel('Distance Crosswind (m)')
     plt.show()
     st.pyplot(fig)
-
-
 
 
 
