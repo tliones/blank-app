@@ -1,10 +1,5 @@
 import streamlit as st
 import requests
-from datetime import datetime
-import math
-import pytz
-import suncalc
-from timezonefinder import TimezoneFinder
 import folium
 from streamlit_folium import folium_static
 
@@ -23,49 +18,56 @@ cities = {
     'Corpus Christi, TX': {'lat': 27.8006, 'lon': -97.3964}
 }
 
-# Fetch weather data from OpenWeatherMap
+# Function to fetch weather data
 def fetch_weather_data(lat, lon):
     url = f"http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric"
     response = requests.get(url)
     return response.json()
 
-# Function to display an interactive map with OpenWeatherMap layers
-def show_weather_map(lat, lon):
-    map_url = f"https://tile.openweathermap.org/map/temp_new/2/{lon}/{lat}.png?appid={api_key}"
+# Function to create and show radar map
+def show_radar_map(lat, lon):
+    # Create base map
+    m = folium.Map(location=[lat, lon], zoom_start=7)
 
-    # Create Folium Map
-    m = folium.Map(location=[lat, lon], zoom_start=8)
-    folium.TileLayer('openstreetmap').add_to(m)
-
-    # Overlay Weather Layer
+    # Add OpenWeatherMap radar (precipitation) layer
     folium.raster_layers.TileLayer(
-        tiles=f"https://tile.openweathermap.org/map/clouds_new/{8}/{lon}/{lat}.png?appid={api_key}",
+        tiles=f"https://tile.openweathermap.org/map/precipitation_new/6/{lon}/{lat}.png?appid={api_key}",
         attr="OpenWeatherMap",
-        name="Clouds",
+        name="Precipitation Radar",
+        overlay=True,
+        control=True
+    ).add_to(m)
+
+    # Add optional layers (Clouds, Wind, Temperature)
+    folium.raster_layers.TileLayer(
+        tiles=f"https://tile.openweathermap.org/map/clouds_new/6/{lon}/{lat}.png?appid={api_key}",
+        attr="OpenWeatherMap",
+        name="Cloud Coverage",
         overlay=True,
         control=True
     ).add_to(m)
 
     folium.raster_layers.TileLayer(
-        tiles=f"https://tile.openweathermap.org/map/temp_new/{8}/{lon}/{lat}.png?appid={api_key}",
+        tiles=f"https://tile.openweathermap.org/map/wind_new/6/{lon}/{lat}.png?appid={api_key}",
         attr="OpenWeatherMap",
-        name="Temperature",
+        name="Wind Speed",
         overlay=True,
         control=True
     ).add_to(m)
 
+    # Add layer control
     folium.LayerControl().add_to(m)
 
-    # Display Map in Streamlit
+    # Display map in Streamlit
     folium_static(m)
 
 # Streamlit UI
-st.title("Weather & Stability Class Calculator")
+st.title("Weather & Radar Viewer")
 
 # City selection dropdown
 city_name = st.selectbox("Select a City:", list(cities.keys()))
 
-if st.button("Get Weather Data"):
+if st.button("Get Weather Data & Radar"):
     city = cities[city_name]
     
     # Fetch weather data
@@ -76,7 +78,7 @@ if st.button("Get Weather Data"):
     wind_deg = weather_data['wind']['deg']
     cloud_cover = weather_data['clouds']['all']
 
-    # Display results
+    # Display weather conditions
     st.subheader(f"Weather Conditions in {city_name}")
     st.write(f"**Temperature:** {temp} °C")
     st.write(f"**Humidity:** {humidity}%")
@@ -84,6 +86,6 @@ if st.button("Get Weather Data"):
     st.write(f"**Wind Speed:** {wind_speed} m/s")
     st.write(f"**Cloud Cover:** {cloud_cover}%")
 
-    # Show weather map
-    st.subheader("Live Weather Map")
-    show_weather_map(city['lat'], city['lon'])
+    # Display radar map
+    st.subheader("Live Weather Radar")
+    show_radar_map(city['lat'], city['lon'])
