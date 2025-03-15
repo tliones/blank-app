@@ -152,8 +152,8 @@ def get_sigma(stability_class, x):
         sigma_z = 0.016 * x ** 0.911
     return sigma_y, sigma_z
 
-def calculate_concentration(x, y, Q, u, sigma_y, sigma_z, H, chem_name):
-    C_gm3 = (Q / (2 * np.pi * sigma_y * sigma_z * u)) * np.exp(-y**2 / (2 * sigma_y**2)) * np.exp(-((0 - H)**2 / (2 * sigma_z**2)))
+def calculate_concentration(x, y, Q, u, sigma_y, sigma_z, chem_name):
+    C_gm3 = (Q / (2 * np.pi * sigma_y * sigma_z * u)) * np.exp(-y**2 / (2 * sigma_y**2)) * np.exp(-((0 - 10)**2 / (2 * sigma_z**2)))
     C_ppm = (C_gm3 / chemicals[chem_name]['Conversion'])
     return C_ppm
 
