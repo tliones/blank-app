@@ -132,7 +132,7 @@ def Chemical_Generation_Rate(min_Vw, max_Vw, min_Ta, max_Ta, min_As, max_As, che
     return G_Rate
 
 def get_sigma(stability_class, x):
-  if stability_class == 'A':  # Very Unstable
+    if stability_class == 'A':  # Very Unstable
         sigma_y = 0.22 * x ** 0.894
         sigma_z = 0.20 * x ** 0.911
     elif stability_class == 'B':  # Moderately Unstable
