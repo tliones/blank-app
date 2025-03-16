@@ -168,13 +168,8 @@ def plot_data(stability_class, Q, u, chem_name):
             concentration_map[j, i] = calculate_concentration(x_values[i], y_values[j], Q, u, sigma_y, sigma_z, chem_name)
 
     #contour_levels = [0.5, 5, 500]  # TLV, STEL, IDLH in ppm
-    chemicals = {
-    'Toluene': {'name': 'Toluene', 'IDLH': 500, 'STEL': 150, 'PEL': 200, 'Conversion': 1.25},
-    'Acetone': {'name': 'Acetone','IDLH': 2500, 'STEL': 100000, 'PEL': 1000, 'Conversion': 2.38},
-    'Benzene': {'name': 'Benzene','IDLH': 500, 'STEL': 5, 'PEL': 1, 'Conversion': 3.19},
-    'Hydrogen Sulfide': {'name': 'Hydrogen Sulfide','IDLH': 100, 'STEL': 50, 'PEL': 20, 'Conversion': 1.40}
-}
-    countour_levels = [chemicals[chem_name]['PEL'],chemicals[chem_name]['STEL'],chemicals[chem_name]['IDLH']]
+    
+    contour_levels = [chemicals[chem_name]['PEL'],chemicals[chem_name]['STEL'],chemicals[chem_name]['IDLH']]
     
     fig, ax = plt.subplots(figsize=(12, 7))
     heatmap = ax.pcolormesh(X, Y, concentration_map, shading='auto', cmap='viridis')
