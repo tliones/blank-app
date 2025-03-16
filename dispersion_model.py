@@ -182,6 +182,38 @@ def plot_data(stability_class, Q, u, chem_name):
     plt.show()
     st.pyplot(fig)
 
+    #Create a DF of Distances:
+
+    # Thresholds
+    thresholds = {
+    'TLV': 0.5,
+    'STEL': 5,
+    'IDLH': 500}
+
+    results = {
+    'Threshold': [],
+    'Max Y-Distance (m)': [],
+    'Max X-Distance (m)': []}
+
+    # Analyze distances for each threshold
+    for name, level in thresholds.items():
+        mask = concentration_map >= level
+        if np.any(mask):
+            y_dist = np.max(np.abs(Y[mask]))  # Maximum y-distance from centerline
+            x_dist = np.max(X[mask])          # Maximum x-distance from source
+        else:
+            y_dist = 0
+            x_dist = 0
+    df = pd.DataFrame(results)
+    st.dataframe(df)
+
+    # Append results
+    results['Threshold'].append(name)
+    results['Max Y-Distance (m)'].append(y_dist)
+    results['Max X-Distance (m)'].append(x_dist)
+
+
+
 
 
 # Streamlit UI
