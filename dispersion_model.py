@@ -199,7 +199,7 @@ def plot_data(stability_class, Q, u, chem_name):
             x_dist = 0
             
         # Append results
-        results['Threshold'].append(name)
+        results['Threshold'].append(name & level)
         results['Max Y-Distance (m)'].append(y_dist)
         results['Max X-Distance (m)'].append(x_dist)
 
