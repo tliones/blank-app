@@ -186,7 +186,7 @@ def plot_data(stability_class, Q, u, chem_name):
 
     # Thresholds
     thresholds = {'TLV': chemicals[chem_name]['PEL'],'STEL': chemicals[chem_name]['STEL'],'IDLH':chemicals[chem_name]['IDLH']}
-    results = {'Threshold': [],'Max Y-Distance (m)': [],'Max X-Distance (m)': []}
+    results = {'Threshold': [], 'Level': [],'Max Y-Distance (m)': [],'Max X-Distance (m)': []}
 
     # Analyze distances for each threshold
     for name, level in thresholds.items():
