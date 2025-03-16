@@ -74,11 +74,11 @@ def determine_stability_class(wind_speed, cloud_cover, solar_altitude):
     if wind_speed < 2:
         return 'A' if solar_insolation == 'Strong' else 'B' if solar_insolation == 'Moderate' else 'C' if solar_insolation == 'Slight' else 'E' if night_time == 'Night >50%' else 'F'
     elif wind_speed < 3:
-        return 'A-B' if solar_insolation == 'Strong' else 'B' if solar_insolation == 'Moderate' else 'C' if solar_insolation == 'Slight' else 'E' if night_time == 'Night >50%' else 'F'
+        return 'A' if solar_insolation == 'Strong' else 'B' if solar_insolation == 'Moderate' else 'C' if solar_insolation == 'Slight' else 'E' if night_time == 'Night >50%' else 'F'
     elif wind_speed < 5:
-        return 'B' if solar_insolation == 'Strong' else 'B-C' if solar_insolation == 'Moderate' else 'C' if solar_insolation == 'Slight' else 'D' if night_time == 'Night >50%' else 'E'
+        return 'B' if solar_insolation == 'Strong' else 'B' if solar_insolation == 'Moderate' else 'C' if solar_insolation == 'Slight' else 'D' if night_time == 'Night >50%' else 'E'
     elif wind_speed < 6:
-        return 'C' if solar_insolation == 'Strong' else 'C-D' if solar_insolation == 'Moderate' else 'D' if solar_insolation == 'Slight' else 'D'
+        return 'C' if solar_insolation == 'Strong' else 'C' if solar_insolation == 'Moderate' else 'D' if solar_insolation == 'Slight' else 'D'
     else:
         return 'C' if solar_insolation == 'Strong' else 'D' if solar_insolation in ['Moderate', 'Slight'] else 'D'
 
