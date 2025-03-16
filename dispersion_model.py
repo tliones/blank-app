@@ -100,8 +100,8 @@ def Chemical_Generation_Rate(min_Vw, max_Vw, min_Ta, max_Ta, min_As, max_As):
 
 # Define your chemical dictionary
 chemicals = {
-    'Toluene': {'name': 'Toluene', 'IDLH': 500, 'STEL': 150, 'PEL': 200, 'Conversion': 1.25},
-    'Acetone': {'name': 'Acetone','IDLH': 2500, 'STEL': 100000, 'PEL': 1000, 'Conversion': 2.38},
+    'Toluene': {'name': 'Toluene', 'IDLH': 500, 'STEL': 150, 'PEL': 10, 'Conversion': 1.25},
+    'Acetone': {'name': 'Acetone','IDLH': 2500, 'STEL': 2500, 'PEL': 1000, 'Conversion': 2.38},
     'Benzene': {'name': 'Benzene','IDLH': 500, 'STEL': 5, 'PEL': 1, 'Conversion': 3.19},
     'Hydrogen Sulfide': {'name': 'Hydrogen Sulfide','IDLH': 100, 'STEL': 50, 'PEL': 20, 'Conversion': 1.40}
 }
