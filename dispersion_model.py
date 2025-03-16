@@ -204,7 +204,7 @@ def plot_data(stability_class, Q, u, chem_name):
         results['Max X-Distance (m)'].append(x_dist)
 
     df_results = pd.DataFrame(results)
-    st.dataframe(df_tesults)
+    st.dataframe(df_results)
 
     
 
