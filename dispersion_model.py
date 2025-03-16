@@ -185,7 +185,7 @@ def plot_data(stability_class, Q, u, chem_name):
     #Create a DF of Distances:
 
     # Thresholds
-    thresholds = {'TLV': 0.5,'STEL': 5,'IDLH': 500}
+    thresholds = {'TLV': chemicals[chem_name]['PEL'],'STEL': chemicals[chem_name]['STEL'],'IDLH':chemicals[chem_name]['IDLH']}
     results = {'Threshold': [],'Max Y-Distance (m)': [],'Max X-Distance (m)': []}
 
     # Analyze distances for each threshold
