@@ -185,15 +185,8 @@ def plot_data(stability_class, Q, u, chem_name):
     #Create a DF of Distances:
 
     # Thresholds
-    thresholds = {
-    'TLV': 0.5,
-    'STEL': 5,
-    'IDLH': 500}
-
-    results = {
-    'Threshold': [],
-    'Max Y-Distance (m)': [],
-    'Max X-Distance (m)': []}
+    thresholds = {'TLV': 0.5,'STEL': 5,'IDLH': 500}
+    results = {'Threshold': [],'Max Y-Distance (m)': [],'Max X-Distance (m)': []}
 
     # Analyze distances for each threshold
     for name, level in thresholds.items():
@@ -204,13 +197,16 @@ def plot_data(stability_class, Q, u, chem_name):
         else:
             y_dist = 0
             x_dist = 0
-    df = pd.DataFrame(results)
-    st.dataframe(df)
+            
+        # Append results
+        results['Threshold'].append(name)
+        results['Max Y-Distance (m)'].append(y_dist)
+        results['Max X-Distance (m)'].append(x_dist)
 
-    # Append results
-    results['Threshold'].append(name)
-    results['Max Y-Distance (m)'].append(y_dist)
-    results['Max X-Distance (m)'].append(x_dist)
+    df_results = pd.DataFrame(results)
+    st.dataframe(df_tesults)
+
+    
 
 
 
