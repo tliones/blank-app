@@ -174,7 +174,7 @@ def plot_data(stability_class, Q, u, chem_name):
     plt.colorbar(heatmap, label='Concentration (ppm)', ax=ax)
     contours = ax.contour(X, Y, concentration_map, levels=contour_levels, colors=['yellow', 'orange', 'red'], linewidths=2)
     ax.clabel(contours, inline=True, fontsize=8, fmt='%1.1f ppm')
-    ax.set_title('Ground-Level Benzene Concentration (x-y Plane) with Hazard Contours')
+    ax.set_title('Ground-Level {chem_name} Concentration (x-y Plane) with Hazard Contours')
     ax.set_xlabel('Distance Downwind (m)')
     ax.set_ylabel('Distance Crosswind (m)')
     plt.show()
