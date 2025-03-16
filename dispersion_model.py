@@ -246,4 +246,4 @@ if st.button("Dispersion Model"):
     st.write(f"**Median:** {median_value:.2f} gm/min")
     st.write(f"**95th Percentile:** {percentile_95:.2f} gm/min")
 
-    plot_data(stability_class, percentile_95, wind_speed, chem_name)
+    plot_data(stability_class, (percentile_95 / 60), wind_speed, chem_name)
